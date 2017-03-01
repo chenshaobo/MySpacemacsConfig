@@ -60,11 +60,42 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   ;; dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(magit-gh-pulls
+                                    magit-gitflow
+                                    evil-mc
+                                    skewer-mode
+                                    vi-tilde-fringe
+                                    coffee-mode
+                                    ace-jump-helm-line
+                                    evil-tutor
+                                    eyebrowse
+                                    stickyfunc-enhance
+                                    smooth-scrolling
+                                    org-repo-todo
+                                    chinese-wbim
+                                    chinese-pyim
+                                    srefactor
+                                    org-download
+                                    org-timer
+                                    org-plus-contrib
+                                    org-tree-slide
+                                    git-gutter
+                                    git-gutter-fringe
+                                    spaceline
+                                    ;; disable it for lispy-mode
+                                    ;;https://github.com/abo-abo/lispy/issues/137
+                                    evil-escape
+                                    ;; neotree
+                                    leuven-theme
+                                    gh-md
+                                    evil-lisp-state
+                                    spray
+                                    doc-view
+                                    lorem-ipsum)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -313,8 +344,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (my-setup-indent 2) ; indent 2 spaces width
   (setq tab-width 2)
   (setq go-tab-width 2)
-  (setq dotspacemacs-additional-packages
-        '((vue-mode :location (recipe :fetcher github :rep "codefalling/vue-mode"))))
   (require 'recentf)
   (recentf-mode 1)
   (setq recentf-max-menu-item 10)
@@ -329,6 +358,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
   (load-theme 'dracula t)
   (setq gofmt-command "goimports")
+  (setq dotspacemacs-additional-packages '(vue-mode))
   )
 
 (defun dotspacemacs/user-config ()
@@ -356,7 +386,7 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (dracula-theme yaml-mode which-key web-mode web-beautify use-package tagedit smeargle slim-mode scss-mode sass-mode reveal-in-osx-finder pug-mode pbcopy osx-trash osx-dictionary orgit org mwim mmm-mode markdown-toc markdown-mode magit-gitflow macrostep livid-mode skewer-mode simple-httpd less-css-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc hydra helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode go-guru go-eldoc gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flycheck-pos-tip pos-tip flycheck pkg-info epl evil-magit magit magit-popup git-commit with-editor evil goto-chg undo-tree emmet-mode elisp-slime-nav diminish diff-hl company-web web-completion-data company-tern s dash-functional tern company-statistics company-go go-mode company coffee-mode bind-map bind-key auto-yasnippet yasnippet auto-compile packed dash ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup quelpa package-build spacemacs-theme))))
+    (vue-mode yaml-mode which-key web-mode web-beautify use-package tagedit smeargle slim-mode scss-mode sass-mode reveal-in-osx-finder pug-mode pbcopy osx-trash osx-dictionary orgit org mwim mmm-mode markdown-toc markdown-mode magit-gitflow macrostep livid-mode skewer-mode simple-httpd less-css-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc hydra helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode go-guru go-eldoc gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flycheck-pos-tip pos-tip flycheck pkg-info epl evil-magit magit magit-popup git-commit with-editor evil goto-chg undo-tree emmet-mode elisp-slime-nav diminish diff-hl company-web web-completion-data company-tern s dash-functional tern company-statistics company-go go-mode company coffee-mode bind-map bind-key auto-yasnippet yasnippet auto-compile packed dash ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup quelpa package-build spacemacs-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
