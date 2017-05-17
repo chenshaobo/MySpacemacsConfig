@@ -31,6 +31,9 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     sql
+     windows-scripts
+     protobuf
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -46,15 +49,15 @@ values."
       (shell :variables
              shell-default-height 30
              shell-default-position 'bottom
-             shell-default-shell 'term
+             shell-default-shell 'shell
              shell-default-term-shell "/bin/zsh")
-      spell-checking
       syntax-checking
       version-control
       go
       javascript
       html
       yaml
+      c-c++
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -139,7 +142,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Monaco"
-                               :size 12
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -193,7 +196,7 @@ values."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'cache
+   dotspacemacs-auto-save-file-location 'original
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
    ;; If non nil, `helm' will try to minimize the space it uses. (default nil)
@@ -322,6 +325,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (delete-selection-mode 1)
   ;; 显示行号
   (global-linum-mode 1)
+  (add-hook 'go-mode-hook (lambda ()
+                                    (fci-mode 1)))
+
+  (setq-default dotspacemacs-line-numbers t)
+
   (setq configuration-layer--elpa-archives
         '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
           ("org-cn"   . "http://elpa.zilongshanren.com/org/")
@@ -329,6 +337,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
   (load-theme 'dracula t)
   (setq gofmt-command "goimports")
+  (setq turn-on-fci-mode t)
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -354,9 +364,11 @@ you should place your code here."
    (quote
     ("4cb3888e27b1cad4e3c80d09ab51306e9a82fb1bf2a4bd1e1f437a0379907093" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
  '(evil-want-Y-yank-to-eol nil)
+ '(go-packages-function (quote go-packages-go-list))
+ '(godef-command "godef")
  '(package-selected-packages
    (quote
-    (dracula-theme yaml-mode which-key web-mode web-beautify use-package tagedit smeargle slim-mode scss-mode sass-mode reveal-in-osx-finder pug-mode pbcopy osx-trash osx-dictionary orgit org mwim mmm-mode markdown-toc markdown-mode magit-gitflow macrostep livid-mode skewer-mode simple-httpd less-css-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc hydra helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode go-guru go-eldoc gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flycheck-pos-tip pos-tip flycheck pkg-info epl evil-magit magit magit-popup git-commit with-editor evil goto-chg undo-tree emmet-mode elisp-slime-nav diminish diff-hl company-web web-completion-data company-tern s dash-functional tern company-statistics company-go go-mode company coffee-mode bind-map bind-key auto-yasnippet yasnippet auto-compile packed dash ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup quelpa package-build spacemacs-theme))))
+    (protobuf-mode sql-indent vmd-mode powershell disaster company-c-headers cmake-mode clang-format go-autocomplete evil-unimpaired xterm-color ws-butler window-numbering volatile-highlights vi-tilde-fringe uuidgen toc-org spaceline powerline shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-projectile org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ google-translate golden-ratio gnuplot flyspell-correct-helm flyspell-correct flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help dumb-jump f define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-dictionary aggressive-indent adaptive-wrap ace-window ace-link dracula-theme yaml-mode which-key web-mode web-beautify use-package tagedit smeargle slim-mode scss-mode sass-mode reveal-in-osx-finder pug-mode pbcopy osx-trash osx-dictionary orgit org mwim mmm-mode markdown-toc markdown-mode magit-gitflow macrostep livid-mode skewer-mode simple-httpd less-css-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc hydra helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode go-guru go-eldoc gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flycheck-pos-tip pos-tip flycheck pkg-info epl evil-magit magit magit-popup git-commit with-editor evil goto-chg undo-tree emmet-mode elisp-slime-nav diminish diff-hl company-web web-completion-data company-tern s dash-functional tern company-statistics company-go go-mode company coffee-mode bind-map bind-key auto-yasnippet yasnippet auto-compile packed dash ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup quelpa package-build spacemacs-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
